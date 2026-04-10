@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Experience — Kwame Gyau Oduro, Software Quality & Assurance Engineer"/>
+  <title>Experience — Kwame Gyau Oduro</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+
+  <style>
+    :root {
+      --bg:#0a0a0a; --bg-surface:#111111; --bg-card:#131313;
+      --border:#1f1f1f; --border-hover:#2e2e2e;
+      --text-primary:#f0ede8; --text-muted:#5a5a5a; --text-dim:#3a3a3a;
+      --accent:#c9a84c; --accent-dim:rgba(201,168,76,0.10); --accent-glow:rgba(201,168,76,0.22);
+      --green:#4caf50;
+      --font-mono:'Space Mono',monospace; --font-sans:'Syne',sans-serif;
+      --nav-h:64px; --ease:cubic-bezier(0.4,0,0.2,1);
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{background:var(--bg);color:var(--text-primary);font-family:var(--font-sans);-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+
+    .grid-overlay{position:fixed;inset:0;z-index:0;pointer-events:none;background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:60px 60px;opacity:0.3;}
+
+    /* NAVBAR */
+    .navbar{position:fixed;top:0;left:0;right:0;height:var(--nav-h);z-index:1000;background:transparent;border-bottom:1px solid transparent;transition:background .3s var(--ease),border-color .3s var(--ease);}
+    .navbar.scrolled{background:rgba(10,10,10,0.92);border-bottom-color:var(--border);backdrop-filter:blur(12px);}
+    .nav-container{max-width:1200px;margin:0 auto;padding:0 2rem;height:100%;display:flex;align-items:center;gap:2.5rem;}
+    .nav-logo{font-family:var(--font-mono);font-size:.95rem;font-weight:700;letter-spacing:.08em;text-decoration:none;color:var(--text-primary);display:flex;align-items:center;gap:.1em;transition:color .25s;flex-shrink:0;}
+    .nav-logo:hover{color:var(--accent);}
+    .logo-bracket{color:var(--accent);font-size:1.1rem;}
+    .logo-name{letter-spacing:.18em;}
+    .nav-links{display:flex;list-style:none;gap:.25rem;margin-left:auto;}
+    .nav-link{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.06em;text-decoration:none;color:var(--text-muted);padding:.5rem .85rem;border:1px solid transparent;border-radius:2px;display:flex;align-items:center;gap:.45em;transition:color .25s,border-color .25s,background .25s;}
+    .link-num{color:var(--accent);font-size:.65rem;opacity:.7;}
+    .nav-link:hover{color:var(--text-primary);border-color:var(--border-hover);background:var(--bg-surface);}
+    .nav-link.active{color:var(--accent);border-color:var(--accent-dim);background:var(--accent-dim);}
+    .nav-cta{font-family:var(--font-mono);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--accent);border:1px solid var(--accent);padding:.55rem 1.1rem;border-radius:2px;display:flex;align-items:center;gap:.5rem;flex-shrink:0;transition:background .25s,color .25s,box-shadow .25s;}
+    .nav-cta:hover{background:var(--accent);color:var(--bg);box-shadow:0 0 18px var(--accent-glow);}
+    .nav-hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;background:none;border:none;cursor:pointer;padding:.5rem;margin-left:auto;}
+    .ham-line{display:block;width:22px;height:1.5px;background:var(--text-primary);transition:transform .25s,opacity .25s,width .25s;transform-origin:center;}
+    .nav-hamburger.open .ham-line:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
+    .nav-hamburger.open .ham-line:nth-child(2){opacity:0;width:0;}
+    .nav-hamburger.open .ham-line:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
+    .nav-mobile{display:none;flex-direction:column;background:var(--bg-surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:1.5rem 2rem 2rem;max-height:0;overflow:hidden;transition:max-height .4s var(--ease);}
+    .nav-mobile.open{max-height:400px;}
+    .mobile-links{list-style:none;display:flex;flex-direction:column;}
+    .mobile-link{font-family:var(--font-mono);font-size:.85rem;letter-spacing:.06em;text-decoration:none;color:var(--text-muted);padding:1rem 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:.75em;transition:color .25s;}
+    .mobile-link:hover{color:var(--accent);}
+    .mobile-cta{margin-top:1.5rem;justify-content:center;}
+    @media(max-width:860px){.nav-links{display:none;}.nav-cta:not(.mobile-cta){display:none;}.nav-hamburger{display:flex;}.nav-mobile{display:flex;}}
+
+    /* PAGE */
+    .page-wrap{position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:calc(var(--nav-h) + 4rem) 2rem 6rem;}
+
+    /* PAGE HEADER */
+    .page-header{display:flex;align-items:flex-end;justify-content:space-between;gap:2rem;margin-bottom:4rem;padding-bottom:2rem;border-bottom:1px solid var(--border);opacity:0;animation:fadeUp .6s var(--ease) .1s forwards;}
+    .page-header-left{display:flex;flex-direction:column;gap:.75rem;}
+    .page-tag{font-family:var(--font-mono);font-size:.62rem;letter-spacing:.22em;color:var(--accent);text-transform:uppercase;display:flex;align-items:center;gap:.8rem;}
+    .page-tag::before{content:'';display:block;width:24px;height:1px;background:var(--accent);opacity:.6;}
+    .page-title{font-family:var(--font-sans);font-size:clamp(2rem,5vw,3.5rem);font-weight:800;letter-spacing:-.03em;line-height:1;color:var(--text-primary);}
+    .page-title span{color:var(--accent);}
+    .page-subtitle{font-family:var(--font-mono);font-size:.72rem;color:var(--text-muted);letter-spacing:.04em;line-height:1.7;max-width:420px;}
+
+    /* METHODOLOGY ROW */
+    .methodology-row{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:4rem;opacity:0;animation:fadeUp .6s var(--ease) .2s forwards;}
+    .method-badge{font-family:var(--font-mono);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);border:1px solid var(--border);padding:.35rem .85rem;border-radius:2px;transition:color .2s,border-color .2s,background .2s;}
+    .method-badge:hover{color:var(--accent);border-color:var(--accent);background:var(--accent-dim);}
+    .method-badge.gold{color:var(--accent);border-color:var(--accent);background:var(--accent-dim);}
+
+    /* PROGRESSION TRACK */
+    .progression{display:flex;align-items:center;gap:0;margin-bottom:5rem;overflow-x:auto;padding-bottom:.5rem;opacity:0;animation:fadeUp .6s var(--ease) .3s forwards;}
+    .prog-node{display:flex;flex-direction:column;align-items:center;gap:.6rem;flex-shrink:0;}
+    .prog-dot{width:10px;height:10px;border-radius:50%;border:1.5px solid var(--accent);background:var(--bg);}
+    .prog-dot.filled{background:var(--accent);}
+    .prog-label{font-family:var(--font-mono);font-size:.58rem;color:var(--text-muted);letter-spacing:.06em;text-align:center;max-width:90px;line-height:1.5;}
+    .prog-label strong{display:block;color:var(--text-primary);margin-bottom:.15rem;}
+    .prog-connector{flex:1;height:1px;min-width:40px;background:linear-gradient(to right,var(--accent),var(--border));opacity:.4;margin-top:-16px;}
+    .prog-arrow{font-size:.6rem;color:var(--accent);opacity:.5;margin-top:-16px;flex-shrink:0;}
+
+    /* EXPERIENCE CARDS */
+    .exp-stack{display:flex;flex-direction:column;gap:2px;}
+
+    .exp-card{
+      background:var(--bg-card);
+      border:1px solid var(--border);
+      border-radius:2px;
+      overflow:hidden;
+      opacity:0;
+      transform:translateY(20px);
+      transition:opacity .6s var(--ease),transform .6s var(--ease),border-color .3s;
+    }
+    .exp-card.visible{opacity:1;transform:translateY(0);}
+    .exp-card:hover{border-color:var(--border-hover);}
+    .exp-card.primary{border-left:3px solid var(--accent);}
+
+    /* card header */
+    .exp-card-header{
+      display:grid;
+      grid-template-columns:1fr auto;
+      gap:1.5rem;
+      padding:2rem 2rem 1.5rem;
+      cursor:pointer;
+      user-select:none;
+    }
+    .exp-card-header:hover .exp-toggle{color:var(--accent);}
+    .exp-header-left{display:flex;flex-direction:column;gap:.6rem;}
+    .exp-role-row{display:flex;align-items:center;gap:1rem;flex-wrap:wrap;}
+    .exp-role{font-family:var(--font-sans);font-size:1.3rem;font-weight:800;letter-spacing:-.02em;color:var(--text-primary);}
+    .exp-badge{font-family:var(--font-mono);font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--bg);background:var(--accent);padding:.2rem .6rem;border-radius:2px;}
+    .exp-company-row{display:flex;align-items:center;gap:.75rem;}
+    .exp-company{font-family:var(--font-mono);font-size:.75rem;color:var(--accent);letter-spacing:.06em;}
+    .exp-sep{color:var(--text-dim);}
+    .exp-date{font-family:var(--font-mono);font-size:.68rem;color:var(--text-muted);letter-spacing:.06em;}
+    .exp-location{font-family:var(--font-mono);font-size:.65rem;color:var(--text-dim);display:flex;align-items:center;gap:.35em;}
+
+    .exp-header-right{display:flex;flex-direction:column;align-items:flex-end;justify-content:space-between;gap:1rem;}
+    .exp-toggle{font-family:var(--font-mono);font-size:.65rem;color:var(--text-dim);letter-spacing:.08em;display:flex;align-items:center;gap:.4rem;transition:color .2s;}
+    .toggle-icon{transition:transform .3s var(--ease);}
+    .exp-card.open .toggle-icon{transform:rotate(180deg);}
+    .exp-type-pill{font-family:var(--font-mono);font-size:.58rem;color:var(--text-muted);border:1px solid var(--border);padding:.2rem .55rem;border-radius:2px;letter-spacing:.06em;}
+
+    /* card body */
+    .exp-card-body{
+      max-height:0;overflow:hidden;
+      transition:max-height .5s var(--ease);
+    }
+    .exp-card.open .exp-card-body{max-height:1200px;}
+    .exp-body-inner{
+      padding:0 2rem 2rem;
+      display:flex;flex-direction:column;gap:2rem;
+      border-top:1px solid var(--border);
+      padding-top:2rem;
+    }
+
+    /* summary */
+    .exp-summary{font-family:var(--font-sans);font-size:.95rem;color:var(--text-muted);line-height:1.8;}
+    .exp-summary strong{color:var(--text-primary);}
+
+    /* responsibility grid */
+    .resp-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:2px;overflow:hidden;}
+    .resp-cell{background:var(--bg-card);padding:1.25rem 1.25rem;display:flex;flex-direction:column;gap:.5rem;transition:background .2s;}
+    .resp-cell:hover{background:var(--bg-surface);}
+    .resp-cell-icon{color:var(--accent);font-size:.8rem;}
+    .resp-cell-title{font-family:var(--font-sans);font-size:.82rem;font-weight:700;color:var(--text-primary);}
+    .resp-cell-desc{font-family:var(--font-mono);font-size:.62rem;color:var(--text-muted);line-height:1.7;letter-spacing:.02em;}
+
+    /* tools used */
+    .tools-used-label{font-family:var(--font-mono);font-size:.6rem;letter-spacing:.18em;color:var(--accent);text-transform:uppercase;opacity:.8;margin-bottom:.6rem;}
+    .tools-used-pills{display:flex;flex-wrap:wrap;gap:.4rem;}
+    .tools-pill{font-family:var(--font-mono);font-size:.62rem;color:var(--text-muted);border:1px solid var(--border);padding:.25rem .6rem;border-radius:2px;letter-spacing:.03em;transition:color .2s,border-color .2s;}
+    .tools-pill:hover{color:var(--accent);border-color:var(--accent-dim);}
+
+    /* achievements */
+    .achieve-list{display:flex;flex-direction:column;gap:.6rem;}
+    .achieve-item{display:flex;align-items:flex-start;gap:.75rem;}
+    .achieve-marker{color:var(--accent);font-family:var(--font-mono);font-size:.65rem;flex-shrink:0;margin-top:3px;}
+    .achieve-text{font-family:var(--font-sans);font-size:.875rem;color:var(--text-muted);line-height:1.7;}
+    .achieve-text strong{color:var(--text-primary);}
+
+    /* sub-section label */
+    .sub-label{font-family:var(--font-mono);font-size:.6rem;letter-spacing:.2em;color:var(--accent);text-transform:uppercase;opacity:.8;padding-bottom:.6rem;border-bottom:1px solid var(--border);}
+
+    /* SKILLS GROWTH */
+    .growth-section{margin-top:5rem;opacity:0;animation:fadeUp .6s var(--ease) .4s forwards;}
+    .growth-header{display:flex;align-items:center;gap:1rem;margin-bottom:2rem;}
+    .growth-title{font-family:var(--font-sans);font-size:1.5rem;font-weight:800;letter-spacing:-.02em;color:var(--text-primary);}
+    .growth-title span{color:var(--accent);}
+    .domain-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem;}
+    .domain-card{background:var(--bg-surface);border:1px solid var(--border);border-radius:2px;padding:1.25rem;display:flex;flex-direction:column;gap:.75rem;transition:border-color .25s,background .25s;}
+    .domain-card:hover{border-color:var(--accent-dim);background:var(--bg-card);}
+    .domain-icon{font-size:1.1rem;}
+    .domain-name{font-family:var(--font-sans);font-size:.9rem;font-weight:700;color:var(--text-primary);}
+    .domain-tools{font-family:var(--font-mono);font-size:.6rem;color:var(--text-muted);line-height:1.8;letter-spacing:.02em;}
+
+    /* FOOTER */
+    .footer{position:relative;z-index:1;background:var(--bg-surface);border-top:1px solid var(--border);padding:4rem 0 2rem;}
+    .footer-container{max-width:1200px;margin:0 auto;padding:0 2rem;}
+    .footer-top{display:grid;grid-template-columns:1fr auto;gap:4rem;align-items:start;margin-bottom:3rem;}
+    .footer-identity{display:flex;flex-direction:column;gap:1rem;}
+    .footer-logo{font-family:var(--font-mono);font-size:1rem;font-weight:700;letter-spacing:.1em;text-decoration:none;color:var(--text-primary);display:inline-flex;align-items:center;gap:.1em;transition:color .25s;}
+    .footer-logo:hover{color:var(--accent);}
+    .footer-tagline{font-family:var(--font-mono);font-size:.72rem;color:var(--text-muted);line-height:1.9;letter-spacing:.04em;}
+    .footer-location{display:inline-flex;align-items:center;gap:.4em;color:var(--text-dim);}
+    .footer-nav{display:flex;gap:4rem;}
+    .footer-nav-col{display:flex;flex-direction:column;gap:1rem;}
+    .footer-nav-label{font-family:var(--font-mono);font-size:.62rem;letter-spacing:.15em;color:var(--accent);text-transform:uppercase;opacity:.8;}
+    .footer-nav-col ul{list-style:none;display:flex;flex-direction:column;gap:.6rem;}
+    .footer-nav-col a{font-family:var(--font-mono);font-size:.75rem;letter-spacing:.04em;color:var(--text-muted);text-decoration:none;display:inline-flex;align-items:center;gap:.4em;transition:color .25s;}
+    .footer-nav-col a:hover{color:var(--accent);}
+    .footer-divider{display:flex;align-items:center;gap:1rem;margin-bottom:2rem;}
+    .divider-line{flex:1;height:1px;background:var(--border);}
+    .divider-icon{color:var(--accent);font-size:.5rem;opacity:.6;}
+    .footer-bottom{display:flex;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap;}
+    .footer-copy{font-family:var(--font-mono);font-size:.68rem;color:var(--text-dim);letter-spacing:.04em;}
+    .copy-mono{color:var(--accent);}
+    .footer-status{font-family:var(--font-mono);font-size:.68rem;color:var(--text-muted);letter-spacing:.06em;display:flex;align-items:center;gap:.6em;}
+    .status-dot{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 6px rgba(76,175,80,.6);animation:pulse-dot 2.5s ease-in-out infinite;flex-shrink:0;}
+    @keyframes pulse-dot{0%,100%{opacity:1;box-shadow:0 0 6px rgba(76,175,80,.6);}50%{opacity:.5;box-shadow:0 0 2px rgba(76,175,80,.2);}}
+    .footer-cv{font-family:var(--font-mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--accent);border:1px solid currentColor;padding:.45rem 1rem;border-radius:2px;display:inline-flex;align-items:center;gap:.5rem;transition:background .25s,color .25s,box-shadow .25s;}
+    .footer-cv:hover{background:var(--accent);color:var(--bg);box-shadow:0 0 14px var(--accent-glow);}
+
+    @keyframes fadeUp{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
+
+    @media(max-width:768px){
+      .exp-card-header{grid-template-columns:1fr;}
+      .exp-header-right{flex-direction:row;align-items:center;}
+      .progression{gap:0;}
+      .footer-top{grid-template-columns:1fr;gap:2.5rem;}
+      .footer-nav{gap:2.5rem;}
+      .footer-bottom{flex-direction:column;align-items:flex-start;gap:1rem;}
+      .page-header{flex-direction:column;align-items:flex-start;}
+    }
+    @media(max-width:560px){
+      .footer-nav{flex-direction:column;gap:2rem;}
+      .resp-grid{grid-template-columns:1fr;}
+      .domain-grid{grid-template-columns:1fr 1fr;}
+    }
+  </style>
+</head>
+<body>
+
+<div class="grid-overlay" aria-hidden="true"></div>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+  <div class="nav-container">
+    <a href="index.html" class="nav-logo"><span class="logo-bracket">[</span><span class="logo-name">KGO</span><span class="logo-bracket">]</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html"      class="nav-link"><span class="link-num">01.</span>Home</a></li>
+      <li><a href="resume.html"     class="nav-link"><span class="link-num">02.</span>Resume</a></li>
+      <li><a href="experience.html" class="nav-link active"><span class="link-num">03.</span>Experience</a></li>
+      <li><a href="projects.html"   class="nav-link"><span class="link-num">04.</span>Projects</a></li>
+      <li><a href="contact.html"    class="nav-link"><span class="link-num">05.</span>Contact</a></li>
+    </ul>
+    <a href="assets/files/Kwame_Gyau_Oduro_Resume.pdf" class="nav-cta" download target="_blank">
+      <span>Download CV</span>
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1v7M3 5l3 3 3-3M1 10h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    </a>
+    <button class="nav-hamburger" id="navHamburger" aria-label="Toggle menu">
+      <span class="ham-line"></span><span class="ham-line"></span><span class="ham-line"></span>
+    </button>
+  </div>
+  <div class="nav-mobile" id="navMobile">
+    <ul class="mobile-links">
+      <li><a href="index.html"      class="mobile-link"><span class="link-num">01.</span>Home</a></li>
+      <li><a href="resume.html"     class="mobile-link"><span class="link-num">02.</span>Resume</a></li>
+      <li><a href="experience.html" class="mobile-link"><span class="link-num">03.</span>Experience</a></li>
+      <li><a href="projects.html"   class="mobile-link"><span class="link-num">04.</span>Projects</a></li>
+      <li><a href="contact.html"    class="mobile-link"><span class="link-num">05.</span>Contact</a></li>
+    </ul>
+    <a href="assets/files/Kwame_Gyau_Oduro_Resume.pdf" class="nav-cta mobile-cta" download target="_blank">Download CV</a>
+  </div>
+</nav>
+
+<!-- PAGE -->
+<div class="page-wrap">
+
+  <!-- Header -->
+  <div class="page-header">
+    <div class="page-header-left">
+      <p class="page-tag">03. Career Journey</p>
+      <h1 class="page-title">My <span>Experience</span></h1>
+      <p class="page-subtitle">A detailed breakdown of every role, responsibility, and technology I've worked with — not a summary, a full picture.</p>
+    </div>
+  </div>
+
+  <!-- Methodology Badges -->
+  <div class="methodology-row">
+    <span class="method-badge gold">Agile / Scrum</span>
+    <span class="method-badge gold">BDD</span>
+    <span class="method-badge gold">Shift-Left Testing</span>
+    <span class="method-badge">CI/CD</span>
+    <span class="method-badge">Risk-Based Testing</span>
+    <span class="method-badge">Exploratory Testing</span>
+    <span class="method-badge">Test-Driven Development</span>
+    <span class="method-badge">Regression Testing</span>
+  </div>
+
+  <!-- Career Progression -->
+  <div class="progression">
+    <div class="prog-node">
+      <div class="prog-dot filled"></div>
+      <div class="prog-label"><strong>2019–2023</strong>KNUST Computer Engineering</div>
+    </div>
+    <div class="prog-connector"></div>
+    <div class="prog-arrow">▶</div>
+    <div class="prog-connector"></div>
+    <div class="prog-node">
+      <div class="prog-dot filled"></div>
+      <div class="prog-label"><strong>Nov 2023–Oct 2024</strong>IT Support Analyst · KNUST</div>
+    </div>
+    <div class="prog-connector"></div>
+    <div class="prog-arrow">▶</div>
+    <div class="prog-connector"></div>
+    <div class="prog-node">
+      <div class="prog-dot filled"></div>
+      <div class="prog-label"><strong>Feb–May 2025</strong>Cloud Trainee · Amalitech</div>
+    </div>
+    <div class="prog-connector"></div>
+    <div class="prog-arrow">▶</div>
+    <div class="prog-connector"></div>
+    <div class="prog-node">
+      <div class="prog-dot filled"></div>
+      <div class="prog-label"><strong>Apr–Dec 2025</strong>QA Trainee · Amalitech</div>
+    </div>
+    <div class="prog-connector"></div>
+    <div class="prog-arrow">▶</div>
+    <div class="prog-connector"></div>
+    <div class="prog-node">
+      <div class="prog-dot filled" style="background:var(--accent);border-color:var(--accent);"></div>
+      <div class="prog-label"><strong>Feb 2026–Now</strong>QA & Validation Engineer · Bosonit</div>
+    </div>
+    <div class="prog-connector"></div>
+    <div class="prog-arrow">▶</div>
+    <div class="prog-connector"></div>
+    <div class="prog-node">
+      <div class="prog-dot"></div>
+      <div class="prog-label"><strong>Next</strong>Senior QA Lead / Graduate Researcher</div>
+    </div>
+  </div>
+
+  <!-- Experience Cards -->
+  <div class="exp-stack">
+
+    <!-- ── BOSONIT GHANA — CURRENT ── -->
+    <div class="exp-card primary open" id="card-bosonit">
+      <div class="exp-card-header" onclick="toggleCard('card-bosonit')">
+        <div class="exp-header-left">
+          <div class="exp-role-row">
+            <span class="exp-role">QA & Validation Engineer</span>
+            <span class="exp-badge">Current</span>
+          </div>
+          <div class="exp-company-row">
+            <span class="exp-company">Bosonit Ghana · Docexploit Team</span>
+            <span class="exp-sep">·</span>
+            <span class="exp-date">Feb 2026 — Present</span>
+            <span class="exp-sep">·</span>
+            <span class="exp-location">
+              <svg width="9" height="9" viewBox="0 0 9 9" fill="none"><circle cx="4.5" cy="3.5" r="1.5" stroke="currentColor" stroke-width="1.1"/><path d="M4.5 9S1.5 6 1.5 3.5a3 3 0 016 0C7.5 6 4.5 9 4.5 9z" stroke="currentColor" stroke-width="1.1" fill="none"/></svg>
+              Accra, Ghana
+            </span>
+          </div>
+        </div>
+        <div class="exp-header-right">
+          <span class="exp-type-pill">Hybrid</span>
+          <span class="exp-toggle">
+            <span>Collapse</span>
+            <svg class="toggle-icon" width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 3.5l3 3 3-3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+          </span>
+        </div>
+      </div>
+
+      <div class="exp-card-body">
+        <div class="exp-body-inner">
+
+          <p class="exp-summary">
+            At <strong>Bosonit Ghana</strong>, I work as a QA & Validation Engineer on the <strong>Docexploit</strong> product — a cybersecurity intelligence platform. My role spans the full quality and validation lifecycle, from manual test execution to pipeline verification, ensuring every release meets the required quality standards before reaching production.
+          </p>
+
+          <div>
+            <p class="sub-label">Responsibilities</p>
+            <div class="resp-grid" style="margin-top:1rem;">
+              <div class="resp-cell">
+                <span class="resp-cell-icon">🛡</span>
+                <div class="resp-cell-title">Software QA</div>
+                <div class="resp-cell-desc">Leading software quality assurance activities across the Docexploit product, defining test strategies and ensuring coverage across all functional areas.</div>
+              </div>
+              <div class="resp-cell">
+                <span class="resp-cell-icon">🔁</span>
+                <div class="resp-cell-title">Pipeline Testing</div>
+                <div class="resp-cell-desc">Verifying build pipeline integrity across environments, ensuring deployments are stable and consistent from development through to production.</div>
+              </div>
+              <div class="resp-cell">
+                <span class="resp-cell-icon">✅</span>
+                <div class="resp-cell-title">Manual Testing</div>
+                <div class="resp-cell-desc">Designing and executing detailed manual test cases covering functional, regression, and exploratory testing scenarios across product features.</div>
+              </div>
+              <div class="resp-cell">
+                <span class="resp-cell-icon">📋</span>
+                <div class="resp-cell-title">Validation</div>
+                <div class="resp-cell-desc">Validating software behaviour against requirements and acceptance criteria, collaborating with development and product to enforce quality gates pre-deployment.</div>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <p class="tools-used-label">Tools Used</p>
+            <div class="tools-used-pills">
+              <span class="tools-pill">Manual Testing</span>
+              <span class="tools-pill">Pipeline Testing</span>
+              <span class="tools-pill">Software Validation</span>
+              <span class="tools-pill">QA Strategy</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ── AMALITECH — QA TRAINING ── -->
+    <div class="exp-card" id="card-amalitech">
+      <div class="exp-card-header" onclick="toggleCard('card-amalitech')">
+        <div class="exp-header-left">
+          <div class="exp-role-row">
+            <span class="exp-role">QA Engineer Trainee</span>
+          </div>
+          <div class="exp-company-row">
+            <span class="exp-company">Amalitech Ghana · QA Training Programme</span>
+            <span class="exp-sep">·</span>
+            <span class="exp-date">Apr 2025 — Dec 2025</span>
+            <span class="exp-sep">·</span>
+            <span class="exp-location">
+              <svg width="9" height="9" viewBox="0 0 9 9" fill="none"><circle cx="4.5" cy="3.5" r="1.5" stroke="currentColor" stroke-width="1.1"/><path d="M4.5 9S1.5 6 1.5 3.5a3 3 0 016 0C7.5 6 4.5 9 4.5 9z" stroke="currentColor" stroke-width="1.1" fill="none"/></svg>
+              Kumasi, Ghana
+            </span>
+          </div>
+        </div>
+        <div class="exp-header-right">
+          <span class="exp-type-pill">Full-time</span>
+          <span class="exp-toggle">
+            <span>Expand</span>
+            <svg class="toggle-icon" width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 3.5l3 3 3-3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+          </span>
+        </div>
+      </div>
+
+      <div class="exp-card-body">
+        <div class="exp-body-inner">
+
+          <p class="exp-summary">
+            As part of Amalitech's structured QA Engineering programme, I was embedded in cross-functional Agile teams working on real product engagements. The programme covered the full quality lifecycle — from test strategy design to CI/CD-integrated automation — across web, mobile, API, security, and performance testing disciplines.
+          </p>
+
+          <div>
+            <p class="sub-label">Responsibilities</p>
+            <div class="resp-grid" style="margin-top:1rem;">
+              <div class="resp-cell">
+                <span class="resp-cell-icon">⚙</span>
+                <div class="resp-cell-title">Web Automation</div>
+                <div class="resp-cell-desc">Built Selenium & Selenide test suites covering end-to-end user flows using Page Object Model patterns for long-term maintainability.</div>
+              </div>
+              <div class="resp-cell">
+                <span class="resp-cell-icon">📱</span>
+                <div class="resp-cell-title">Mobile Testing</div>
+                <div class="resp-cell-desc">Automated mobile application testing with Appium across Android platforms, covering functional and regression scenarios.</div>
+              </div>
+              <div class="resp-cell">
+                <span class="resp-cell-icon">🔌</span>
+                <div class="resp-cell-title">API Testing</div>
+                <div class="resp-cell-desc">Executed manual API tests in Postman and built automated suites with Rest Assured, validating responses, schemas, and edge cases.</div>
+              </div>
+              <div class="resp-cell">
+                <span class="resp-cell-icon">🛡</span>
+                <div class="resp-cell-title">Security Testing</div>
+                <div class="resp-cell-desc">Used OWASP ZAP for active and passive security scans, identifying OWASP Top 10 vulnerabilities with documented remediation steps.</div>
+              </div>
+              <div class="resp-cell">
+                <span class="resp-cell-icon">⚡</span>
+                <div class="resp-cell-title">Performance Testing</div>
+                <div class="resp-cell-desc">Designed load, stress, and soak test plans in Apache JMeter, producing benchmark reports used to define product SLAs.</div>
+              </div>
+              <div class="resp-cell">
+                <span class="resp-cell-icon">🥒</span>
+                <div class="resp-cell-title">BDD with Cucumber</div>
+                <div class="resp-cell-desc">Authored Gherkin feature files with product owners, bridging business requirements and automated test coverage.</div>
+              </div>
+              <div class="resp-cell">
+                <span class="resp-cell-icon">🔁</span>
+                <div class="resp-cell-title">CI/CD Integration</div>
+                <div class="resp-cell-desc">Configured Jenkins and GitHub Actions pipelines with test gates on PR merges, plus Slack/email notifications post-run.</div>
+              </div>
+              <div class="resp-cell">
+                <span class="resp-cell-icon">🐳</span>
+                <div class="resp-cell-title">Containerisation</div>
+                <div class="resp-cell-desc">Dockerised test environments to ensure consistent execution across local and CI infrastructure.</div>
+              </div>
+              <div class="resp-cell">
+                <span class="resp-cell-icon">📋</span>
+                <div class="resp-cell-title">Test Management</div>
+                <div class="resp-cell-desc">Managed end-to-end test lifecycle in Jira Xray — plans, executions, defect tracking, and traceability matrices per sprint.</div>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <p class="sub-label">Key Achievements</p>
+            <div class="achieve-list" style="margin-top:1rem;">
+              <div class="achieve-item">
+                <span class="achieve-marker">◆</span>
+                <p class="achieve-text">Led automated testing of the <strong>SwagLabs application</strong> using Selenium, Selenide, and Appium — unified web and mobile framework with a shared POM architecture.</p>
+              </div>
+              <div class="achieve-item">
+                <span class="achieve-marker">◆</span>
+                <p class="achieve-text">Served as QA Engineer on <strong>SkillDev</strong>, an AI-powered skill development platform — designed a two-layer test strategy covering deterministic platform flows and AI output validation.</p>
+              </div>
+              <div class="achieve-item">
+                <span class="achieve-marker">◆</span>
+                <p class="achieve-text">First on the team to integrate <strong>OWASP ZAP security scans</strong> directly into the CI/CD pipeline, making security a continuous concern rather than a periodic audit.</p>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <p class="tools-used-label">Tools Used</p>
+            <div class="tools-used-pills">
+              <span class="tools-pill">Selenium</span><span class="tools-pill">Selenide</span>
+              <span class="tools-pill">Appium</span><span class="tools-pill">OWASP ZAP</span>
+              <span class="tools-pill">Apache JMeter</span><span class="tools-pill">Rest Assured</span>
+              <span class="tools-pill">Postman</span><span class="tools-pill">Cucumber / Gherkin</span>
+              <span class="tools-pill">Jira Xray</span><span class="tools-pill">Jenkins</span>
+              <span class="tools-pill">GitHub Actions</span><span class="tools-pill">Docker</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ── AMALITECH — CLOUD COMPUTING ── -->
+    <div class="exp-card" id="card-cloud">
+      <div class="exp-card-header" onclick="toggleCard('card-cloud')">
+        <div class="exp-header-left">
+          <div class="exp-role-row">
+            <span class="exp-role">Cloud Computing Trainee</span>
+          </div>
+          <div class="exp-company-row">
+            <span class="exp-company">Amalitech Ghana · Cloud Programme</span>
+            <span class="exp-sep">·</span>
+            <span class="exp-date">Feb 2025 — May 2025</span>
+            <span class="exp-sep">·</span>
+            <span class="exp-location">
+              <svg width="9" height="9" viewBox="0 0 9 9" fill="none"><circle cx="4.5" cy="3.5" r="1.5" stroke="currentColor" stroke-width="1.1"/><path d="M4.5 9S1.5 6 1.5 3.5a3 3 0 016 0C7.5 6 4.5 9 4.5 9z" stroke="currentColor" stroke-width="1.1" fill="none"/></svg>
+              Accra, Ghana
+            </span>
+          </div>
+        </div>
+        <div class="exp-header-right">
+          <span class="exp-type-pill">Full-time</span>
+          <span class="exp-toggle">
+            <span>Expand</span>
+            <svg class="toggle-icon" width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 3.5l3 3 3-3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+          </span>
+        </div>
+      </div>
+
+      <div class="exp-card-body">
+        <div class="exp-body-inner">
+
+          <p class="exp-summary">
+            Completed Amalitech's intensive <strong>Cloud Computing Training Programme</strong>, covering core cloud infrastructure concepts, AWS services, security fundamentals, and cloud economics. The programme culminated in sitting and <strong>passing the AWS Certified Cloud Practitioner examination</strong> — a globally recognised AWS foundational certification.
+          </p>
+
+          <div>
+            <p class="sub-label">Key Outcomes</p>
+            <div class="achieve-list" style="margin-top:1rem;">
+              <div class="achieve-item">
+                <span class="achieve-marker">◆</span>
+                <p class="achieve-text">Attained the <strong>AWS Certified Cloud Practitioner</strong> certification, validating knowledge of AWS core services, cloud architecture, security, and pricing models.</p>
+              </div>
+              <div class="achieve-item">
+                <span class="achieve-marker">◆</span>
+                <p class="achieve-text">Gained foundational understanding of <strong>cloud infrastructure concepts</strong> — compute, storage, networking, IAM, and deployment models — directly applicable to modern QA and DevOps workflows.</p>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <p class="tools-used-label">Skills & Certification</p>
+            <div class="tools-used-pills">
+              <span class="tools-pill">AWS</span>
+              <span class="tools-pill">Cloud Practitioner ✓</span>
+              <span class="tools-pill">IAM & Security</span>
+              <span class="tools-pill">Cloud Architecture</span>
+              <span class="tools-pill">EC2 · S3 · RDS</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ── KNUST E-LEARNING ── -->
+    <div class="exp-card" id="card-knust">
+      <div class="exp-card-header" onclick="toggleCard('card-knust')">
+        <div class="exp-header-left">
+          <div class="exp-role-row">
+            <span class="exp-role">IT Support Analyst</span>
+          </div>
+          <div class="exp-company-row">
+            <span class="exp-company">KNUST E-Learning Centre · National Service</span>
+            <span class="exp-sep">·</span>
+            <span class="exp-date">Nov 2023 — Oct 2024</span>
+            <span class="exp-sep">·</span>
+            <span class="exp-location">
+              <svg width="9" height="9" viewBox="0 0 9 9" fill="none"><circle cx="4.5" cy="3.5" r="1.5" stroke="currentColor" stroke-width="1.1"/><path d="M4.5 9S1.5 6 1.5 3.5a3 3 0 016 0C7.5 6 4.5 9 4.5 9z" stroke="currentColor" stroke-width="1.1" fill="none"/></svg>
+              Kumasi, Ghana
+            </span>
+          </div>
+        </div>
+        <div class="exp-header-right">
+          <span class="exp-type-pill">National Service</span>
+          <span class="exp-toggle">
+            <span>Expand</span>
+            <svg class="toggle-icon" width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 3.5l3 3 3-3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+          </span>
+        </div>
+      </div>
+
+      <div class="exp-card-body">
+        <div class="exp-body-inner">
+
+          <p class="exp-summary">
+            Completed my national service at <strong>KNUST's E-Learning Centre</strong>, providing technical support for digital learning infrastructure serving thousands of students and faculty. This role built the systematic diagnostic mindset and early validation instincts that underpin my QA career today.
+          </p>
+
+          <div>
+            <p class="sub-label">Responsibilities</p>
+            <div class="resp-grid" style="margin-top:1rem;">
+              <div class="resp-cell">
+                <span class="resp-cell-icon">🖥</span>
+                <div class="resp-cell-title">Technical Support</div>
+                <div class="resp-cell-desc">Diagnosed and resolved hardware, software, and network issues for students and faculty accessing e-learning platforms daily.</div>
+              </div>
+              <div class="resp-cell">
+                <span class="resp-cell-icon">✅</span>
+                <div class="resp-cell-title">System Validation</div>
+                <div class="resp-cell-desc">Tested and validated new e-learning system deployments before go-live, verifying functional requirements were met — early QA exposure.</div>
+              </div>
+              <div class="resp-cell">
+                <span class="resp-cell-icon">📡</span>
+                <div class="resp-cell-title">Platform Maintenance</div>
+                <div class="resp-cell-desc">Monitored uptime and performance of learning management systems, escalating and documenting recurring issues for the engineering team.</div>
+              </div>
+              <div class="resp-cell">
+                <span class="resp-cell-icon">👥</span>
+                <div class="resp-cell-title">User Training</div>
+                <div class="resp-cell-desc">Trained academic staff on e-learning tools, improving adoption rates and reducing repeat support requests over the service year.</div>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <p class="tools-used-label">Skills Built</p>
+            <div class="tools-used-pills">
+              <span class="tools-pill">LMS Platforms</span>
+              <span class="tools-pill">Network Diagnostics</span>
+              <span class="tools-pill">System Testing</span>
+              <span class="tools-pill">Documentation</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /exp-stack -->
+
+  <!-- Domain Grid -->
+  <div class="growth-section">
+    <div class="growth-header">
+      <h2 class="growth-title">Testing <span>Domains</span></h2>
+    </div>
+    <div class="domain-grid">
+      <div class="domain-card">
+        <div class="domain-icon">⚙</div>
+        <div class="domain-name">Web Automation</div>
+        <div class="domain-tools">Selenium · Selenide<br>Page Object Model · BDD</div>
+      </div>
+      <div class="domain-card">
+        <div class="domain-icon">📱</div>
+        <div class="domain-name">Mobile Testing</div>
+        <div class="domain-tools">Appium · Android<br>Functional & Regression</div>
+      </div>
+      <div class="domain-card">
+        <div class="domain-icon">🔌</div>
+        <div class="domain-name">API Testing</div>
+        <div class="domain-tools">Postman · Rest Assured<br>Schema Validation · Mocking</div>
+      </div>
+      <div class="domain-card">
+        <div class="domain-icon">🛡</div>
+        <div class="domain-name">Security Testing</div>
+        <div class="domain-tools">OWASP ZAP · OWASP Top 10<br>Vulnerability Reporting</div>
+      </div>
+      <div class="domain-card">
+        <div class="domain-icon">⚡</div>
+        <div class="domain-name">Performance Testing</div>
+        <div class="domain-tools">Apache JMeter · Load Testing<br>Stress · Soak · SLA Definition</div>
+      </div>
+      <div class="domain-card">
+        <div class="domain-icon">🔁</div>
+        <div class="domain-name">CI/CD & DevOps</div>
+        <div class="domain-tools">Jenkins · GitHub Actions<br>Docker · Slack Notifications</div>
+      </div>
+      <div class="domain-card">
+        <div class="domain-icon">📋</div>
+        <div class="domain-name">Test Management</div>
+        <div class="domain-tools">Jira Xray · Test Plans<br>Defect Tracking · Traceability</div>
+      </div>
+      <div class="domain-card">
+        <div class="domain-icon">🎨</div>
+        <div class="domain-name">Design & Frontend</div>
+        <div class="domain-tools">Figma · Photoshop<br>HTML · CSS · React · TS</div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /page-wrap -->
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-container">
+    <div class="footer-top">
+      <div class="footer-identity">
+        <a href="index.html" class="footer-logo"><span class="logo-bracket">[</span><span class="logo-name">KGO</span><span class="logo-bracket">]</span></a>
+        <p class="footer-tagline">Software Quality &amp; Assurance Engineer<br>
+          <span class="footer-location">
+            <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="4" r="2" stroke="currentColor" stroke-width="1.2"/><path d="M5 10C5 10 1.5 6.5 1.5 4a3.5 3.5 0 017 0C8.5 6.5 5 10 5 10z" stroke="currentColor" stroke-width="1.2" fill="none"/></svg>
+            Accra, Ghana
+          </span>
+        </p>
+      </div>
+      <div class="footer-nav">
+        <div class="footer-nav-col">
+          <p class="footer-nav-label">// pages</p>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="resume.html">Resume</a></li>
+            <li><a href="experience.html">Experience</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-nav-col">
+          <p class="footer-nav-label">// connect</p>
+          <ul>
+            <li><a href="https://www.linkedin.com/in/kwameoduro/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://github.com/Kwameoduro" target="_blank">GitHub</a></li>
+            <li><a href="/cdn-cgi/l/email-protection#4b242f3e3924203c2a262e2e2e0b2c262a222765282426">Email</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-divider"><span class="divider-line"></span><span class="divider-icon">◆</span><span class="divider-line"></span></div>
+    <div class="footer-bottom">
+      <p class="footer-copy"><span class="copy-mono">©</span> <span id="footer-year"></span> Kwame Gyau Oduro. All rights reserved.</p>
+      <p class="footer-status"><span class="status-dot"></span> Available for opportunities</p>
+      <a href="assets/files/Kwame_Gyau_Oduro_Resume.pdf" class="footer-cv" download target="_blank">
+        Download CV
+        <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1v6M2.5 5l2.5 2 2.5-2M1 9h8" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+      </a>
+    </div>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  // Navbar
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 20), { passive: true });
+
+  // Mobile menu
+  const hamburger = document.getElementById('navHamburger');
+  const mobileMenu = document.getElementById('navMobile');
+  hamburger.addEventListener('click', () => {
+    const open = hamburger.classList.toggle('open');
+    mobileMenu.classList.toggle('open', open);
+  });
+
+  // Footer year
+  document.getElementById('footer-year').textContent = new Date().getFullYear();
+
+  // Card toggle
+  function toggleCard(id) {
+    const card = document.getElementById(id);
+    const isOpen = card.classList.toggle('open');
+    const toggleSpan = card.querySelector('.exp-toggle span');
+    toggleSpan.textContent = isOpen ? 'Collapse' : 'Expand';
+  }
+
+  // Scroll reveal for cards
+  const cardObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.05 });
+  document.querySelectorAll('.exp-card').forEach(c => cardObserver.observe(c));
+
+  // Scroll reveal for domain cards
+  const domainObserver = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => {
+          e.target.style.opacity = '1';
+          e.target.style.transform = 'translateY(0)';
+        }, i * 60);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.domain-card').forEach(d => {
+    d.style.opacity = '0';
+    d.style.transform = 'translateY(12px)';
+    d.style.transition = 'opacity .5s ease, transform .5s ease';
+    domainObserver.observe(d);
+  });
+</script>
+
+</body>
+</html>

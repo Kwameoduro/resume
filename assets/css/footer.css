@@ -1,0 +1,231 @@
+/* ============================================================
+   FOOTER STYLES — kwame-portfolio
+   Architectural | Precise | Dark base, gold accent
+   ============================================================ */
+
+/* ── Footer Shell ── */
+.footer {
+  background: var(--bg-surface);
+  border-top: 1px solid var(--border);
+  padding: 4rem 0 2rem;
+  margin-top: auto;
+}
+
+/* ── Container ── */
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* ── Top Row ── */
+.footer-top {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 4rem;
+  align-items: start;
+  margin-bottom: 3rem;
+}
+
+/* ── Identity ── */
+.footer-identity {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.footer-logo {
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-decoration: none;
+  color: var(--text-primary);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.1em;
+  transition: color var(--transition);
+}
+
+.footer-logo:hover { color: var(--accent); }
+
+.footer-tagline {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  line-height: 1.9;
+  letter-spacing: 0.04em;
+}
+
+.footer-location {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  color: var(--text-dim);
+  margin-top: 0.1rem;
+}
+
+/* ── Nav Columns ── */
+.footer-nav {
+  display: flex;
+  gap: 4rem;
+}
+
+.footer-nav-col {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.footer-nav-label {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.15em;
+  color: var(--accent);
+  text-transform: uppercase;
+  opacity: 0.8;
+}
+
+.footer-nav-col ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.footer-nav-col a {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  transition: color var(--transition);
+}
+
+.footer-nav-col a:hover { color: var(--accent); }
+
+.footer-nav-col a svg {
+  opacity: 0;
+  transform: translate(-2px, 2px);
+  transition: opacity var(--transition), transform var(--transition);
+}
+
+.footer-nav-col a:hover svg {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+
+/* ── Divider ── */
+.footer-divider {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.divider-line {
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+.divider-icon {
+  color: var(--accent);
+  font-size: 0.5rem;
+  opacity: 0.6;
+}
+
+/* ── Bottom Row ── */
+.footer-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.footer-copy {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--text-dim);
+  letter-spacing: 0.04em;
+}
+
+.copy-mono { color: var(--accent); }
+
+/* ── Status indicator ── */
+.footer-status {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  letter-spacing: 0.06em;
+  display: flex;
+  align-items: center;
+  gap: 0.6em;
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #4caf50;
+  box-shadow: 0 0 6px rgba(76, 175, 80, 0.6);
+  animation: pulse-dot 2.5s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; box-shadow: 0 0 6px rgba(76,175,80,0.6); }
+  50%       { opacity: 0.5; box-shadow: 0 0 2px rgba(76,175,80,0.2); }
+}
+
+/* ── CV Button ── */
+.footer-cv {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--accent);
+  border: 1px solid currentColor;
+  padding: 0.45rem 1rem;
+  border-radius: 2px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: background var(--transition), color var(--transition), box-shadow var(--transition);
+}
+
+.footer-cv:hover {
+  background: var(--accent);
+  color: var(--bg);
+  box-shadow: 0 0 14px var(--accent-glow);
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .footer-top {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .footer-nav {
+    gap: 2.5rem;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-nav {
+    flex-direction: column;
+    gap: 2rem;
+  }
+}
