@@ -95,13 +95,21 @@
     .nav-hamburger.open .ham-line:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
     .nav-hamburger.open .ham-line:nth-child(2) { opacity: 0; width: 0; }
     .nav-hamburger.open .ham-line:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
-    .nav-mobile { display: none; flex-direction: column; background: var(--bg-surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 1.5rem 2rem 2rem; max-height: 0; overflow: hidden; transition: max-height 0.4s var(--ease); }
-    .nav-mobile.open { max-height: 400px; }
+    .nav-mobile {
+      position: fixed; top: var(--nav-h); left: 0; right: 0; z-index: 999;
+      display: flex; flex-direction: column;
+      background: var(--bg-surface); border-bottom: 1px solid var(--border);
+      max-height: 0; overflow: hidden; padding: 0 2rem;
+      transition: max-height 0.4s var(--ease), padding 0.3s var(--ease);
+    }
+    .nav-mobile.open { max-height: 420px; padding: 1.5rem 2rem 2rem; }
     .mobile-links { list-style: none; display: flex; flex-direction: column; }
     .mobile-link { font-family: var(--font-mono); font-size: 0.85rem; letter-spacing: 0.06em; text-decoration: none; color: var(--text-muted); padding: 1rem 0; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 0.75em; transition: color 0.25s var(--ease); }
     .mobile-link:hover { color: var(--accent); }
+    .mobile-link.active { color: var(--accent); }
     .mobile-cta { margin-top: 1.5rem; justify-content: center; }
-    @media(max-width:860px){.nav-links{display:none;}.nav-cta:not(.mobile-cta){display:none;}.nav-hamburger{display:flex;}.nav-mobile{display:flex;}}
+    @media(max-width:860px){.nav-links{display:none;}.nav-cta:not(.mobile-cta){display:none;}.nav-hamburger{display:flex;}}
+    @media(min-width:861px){.nav-mobile{display:none!important;}}
 
     /* ── GRID OVERLAY ── */
     .grid-overlay {
@@ -555,7 +563,7 @@
 
         <!-- Left: Name & Role -->
         <div class="hero-name-block">
-          <p class="hero-label">Software Quality Assurance Engineer</p>
+          <p class="hero-label">Software Quality &amp; Assurance Engineer</p>
 
           <h1 class="hero-name">
             <span class="name-line">Kwame</span>
@@ -629,8 +637,8 @@
       </div>
       <div class="about-right">
         <p class="about-bio">
-          I'm <strong>Kwame Gyau Oduro</strong>, a Software Quality Assurance Engineer based in <strong>Accra, Ghana</strong>.
-          Trained at Amalitech Ghana and equipped with a <strong>BSc. in Computer Engineering</strong> from Kwame Nkrumah University of Science and Technology, I bring a blend of technical expertise and a relentless passion for software quality.
+          I'm <strong>Kwame Gyau Oduro</strong>, a Software Quality & Assurance Engineer based in <strong>Accra, Ghana</strong>.
+          Trained at Amalitech Ghana and equipped with a <strong>BSc. in Computer Engineering</strong> from KNUST,
           I specialise in building bulletproof test frameworks that catch defects before they reach your users.
         </p>
         <p class="about-bio">
@@ -696,7 +704,7 @@
             <ul>
               <li><a href="https://www.linkedin.com/in/kwameoduro/" target="_blank" rel="noopener">LinkedIn <svg width="8" height="8" viewBox="0 0 8 8" fill="none"><path d="M1 7L7 1M7 1H3M7 1v4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg></a></li>
               <li><a href="https://github.com/Kwameoduro" target="_blank" rel="noopener">GitHub <svg width="8" height="8" viewBox="0 0 8 8" fill="none"><path d="M1 7L7 1M7 1H3M7 1v4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg></a></li>
-              <li><a href="mailto:odurokwameee@gmail.com">Email <svg width="8" height="8" viewBox="0 0 8 8" fill="none"><path d="M1 7L7 1M7 1H3M7 1v4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg></a></li>
+              <li><a href="/cdn-cgi/l/email-protection#751a1100071a1e021418101010351218141c195b161a18">Email <svg width="8" height="8" viewBox="0 0 8 8" fill="none"><path d="M1 7L7 1M7 1H3M7 1v4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg></a></li>
             </ul>
           </div>
         </div>
@@ -717,7 +725,7 @@
     </div>
   </footer>
 
-  <script>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
     // ── Navbar scroll
     const navbar = document.getElementById('navbar');
     window.addEventListener('scroll', () => {
