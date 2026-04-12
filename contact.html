@@ -47,14 +47,14 @@
     .nav-hamburger.open .ham-line:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
     .nav-hamburger.open .ham-line:nth-child(2){opacity:0;width:0;}
     .nav-hamburger.open .ham-line:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
-    .nav-mobile{display:none;flex-direction:column;background:var(--bg-surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:1.5rem 2rem 2rem;max-height:0;overflow:hidden;transition:max-height .4s var(--ease);}
-    .nav-mobile.open{max-height:400px;}
+    .nav-mobile{position:fixed;top:var(--nav-h);left:0;right:0;z-index:999;display:flex;flex-direction:column;background:var(--bg-surface);border-bottom:1px solid var(--border);max-height:0;overflow:hidden;padding:0 2rem;transition:max-height .4s var(--ease),padding .3s var(--ease);}
+    .nav-mobile.open{max-height:420px;padding:1.5rem 2rem 2rem;}
     .mobile-links{list-style:none;display:flex;flex-direction:column;}
     .mobile-link{font-family:var(--font-mono);font-size:.85rem;letter-spacing:.06em;text-decoration:none;color:var(--text-muted);padding:1rem 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:.75em;transition:color .25s;}
-    .mobile-link:hover{color:var(--accent);}
+    .mobile-link:hover,.mobile-link.active{color:var(--accent);}
     .mobile-cta{margin-top:1.5rem;justify-content:center;}
-    @media(max-width:860px){.nav-links{display:none;}.nav-cta:not(.mobile-cta){display:none;}.nav-hamburger{display:flex;}.nav-mobile{display:flex;}}
-
+    @media(max-width:860px){.nav-links{display:none;}.nav-cta:not(.mobile-cta){display:none;}.nav-hamburger{display:flex;}}
+    @media(min-width:861px){.nav-mobile{display:none!important;}}
     /* PAGE */
     .page-wrap{position:relative;z-index:1;flex:1;max-width:1200px;margin:0 auto;width:100%;padding:calc(var(--nav-h) + 4rem) 2rem 6rem;}
 
@@ -339,15 +339,22 @@
     @media(max-width:860px){
       .contact-grid{grid-template-columns:1fr;}
       .contact-left{border-right:none;border-bottom:1px solid var(--border);}
+      .page-wrap{overflow-x:hidden;}
       .footer-top{grid-template-columns:1fr;gap:2.5rem;}
       .footer-nav{gap:2.5rem;}
       .footer-bottom{flex-direction:column;align-items:flex-start;gap:1rem;}
     }
     @media(max-width:560px){
-      .contact-left,.contact-right{padding:2rem 1.25rem;}
+      .contact-left,.contact-right{padding:1.5rem 1rem;}
+      .contact-grid{border-left:none;border-right:none;}
+      .page-wrap{padding-left:1rem;padding-right:1rem;}
       .field-row{grid-template-columns:1fr;}
-      .social-grid{grid-template-columns:1fr;}
+      .social-grid{grid-template-columns:1fr 1fr;}
       .footer-nav{flex-direction:column;gap:2rem;}
+      .form-submit-row{flex-direction:column;align-items:stretch;}
+      .btn-submit{justify-content:center;}
+      .contact-item-value{font-size:.6rem;word-break:break-all;}
+      .closing-heading{font-size:1.4rem;}
     }
   </style>
 </head>
@@ -432,7 +439,7 @@
             </div>
             <div class="contact-item-info">
               <span class="contact-item-label">Email</span>
-              <span class="contact-item-value">odurokwameee@gmail.com</span>
+              <span class="contact-item-value"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="08676c7d7a67637f69656d6d6d486f65696164266b6765">[email&#160;protected]</a></span>
             </div>
           </div>
           <div style="display:flex;align-items:center;gap:.6rem;">
@@ -519,7 +526,7 @@
       <div class="form-success" id="formSuccess">
         <div class="success-icon">✓</div>
         <div class="success-title">Message Sent</div>
-        <div class="success-sub">Thanks for reaching out. I'll get back to you<br>at odurokwameee@gmail.com within 24 hours.</div>
+        <div class="success-sub">Thanks for reaching out. I'll get back to you<br>at <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="157a7160677a7e627478707070557278747c793b767a78">[email&#160;protected]</a> within 24 hours.</div>
         <button class="success-reset" onclick="resetForm()">Send another message</button>
       </div>
 
@@ -563,7 +570,7 @@
 
         <div class="form-submit-row">
           <p class="form-note">
-            Your message goes directly<br>to odurokwameee@gmail.com
+            Your message goes directly<br>to <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c5aaa1b0b7aaaeb2a4a8a0a0a085a2a8a4aca9eba6aaa8">[email&#160;protected]</a>
           </p>
           <button type="submit" class="btn-submit" id="submitBtn">
             Send Message
@@ -606,7 +613,7 @@
           <ul>
             <li><a href="https://www.linkedin.com/in/kwameoduro/" target="_blank">LinkedIn</a></li>
             <li><a href="https://github.com/Kwameoduro" target="_blank">GitHub</a></li>
-            <li><a href="mailto:odurokwameee@gmail.com">Email</a></li>
+            <li><a href="/cdn-cgi/l/email-protection#0a656e7f7865617d6b676f6f6f4a6d676b636624696567">Email</a></li>
           </ul>
         </div>
       </div>
@@ -623,7 +630,7 @@
   </div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   // Navbar
   const navbar = document.getElementById('navbar');
   window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 20), { passive: true });
